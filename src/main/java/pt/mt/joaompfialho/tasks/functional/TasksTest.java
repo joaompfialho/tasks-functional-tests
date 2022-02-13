@@ -9,8 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TasksTest {
-
-	private WebDriver driver;
 	
 	public WebDriver applicationAccess() {
 		WebDriver driver = new ChromeDriver();
@@ -23,7 +21,7 @@ public class TasksTest {
 	@Test
 	public void shouldSaveNewTaskWithSuccess() {
 
-		driver = applicationAccess();
+		WebDriver driver = applicationAccess();
 		
 		try {
 			// Click "Add Todo" button
@@ -50,7 +48,7 @@ public class TasksTest {
 	@Test
 	public void shouldNotSaveNewTaskWithPastDueDate() {
 
-		driver = applicationAccess();
+		WebDriver driver = applicationAccess();
 
 		try {
 			// Click "Add Todo" button
@@ -77,7 +75,7 @@ public class TasksTest {
 	@Test
 	public void shouldNotSaveNewTaskWithoutDescription() {
 
-		driver = applicationAccess();
+		WebDriver driver = applicationAccess();
 		
 		try {
 			// Click "Add Todo" button
@@ -101,7 +99,7 @@ public class TasksTest {
 	@Test
 	public void shouldNotSaveNewTaskWithoutDate() {
 
-		driver = applicationAccess();
+		WebDriver driver = applicationAccess();
 		
 		try {
 			// Click "Add Todo" button
