@@ -1,5 +1,7 @@
 package pt.mt.joaompfialho.tasks.functional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -7,19 +9,23 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 	
-	public WebDriver applicationAccess() {
-		WebDriver driver = new ChromeDriver();
-		driver.navigate().to("http://localhost:8001/tasks/");
+	public WebDriver applicationAccess() throws MalformedURLException {
+		//WebDriver driver = new ChromeDriver();
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		WebDriver driver = new RemoteWebDriver(new URL("http://192.168.1.79:4444/wd/hub"), cap);
+		driver.navigate().to("http://192.168.1.79:8001/tasks/");
 		// Implicitly Wait with 10 seconds
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
 	}
 	
 	@Test
-	public void shouldSaveNewTaskWithSuccess() {
+	public void shouldSaveNewTaskWithSuccess() throws MalformedURLException {
 
 		WebDriver driver = applicationAccess();
 		
@@ -46,7 +52,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void shouldNotSaveNewTaskWithPastDueDate() {
+	public void shouldNotSaveNewTaskWithPastDueDate() throws MalformedURLException {
 
 		WebDriver driver = applicationAccess();
 
@@ -73,7 +79,7 @@ public class TasksTest {
 	}
 
 	@Test
-	public void shouldNotSaveNewTaskWithoutDescription() {
+	public void shouldNotSaveNewTaskWithoutDescription() throws MalformedURLException {
 
 		WebDriver driver = applicationAccess();
 		
@@ -97,7 +103,7 @@ public class TasksTest {
 	}
 	
 	@Test
-	public void shouldNotSaveNewTaskWithoutDate() {
+	public void shouldNotSaveNewTaskWithoutDate() throws MalformedURLException {
 
 		WebDriver driver = applicationAccess();
 		
